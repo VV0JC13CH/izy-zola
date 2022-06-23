@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="flex flex-wrap w-full">
+      {% for tag in terms %}
+     <div class="inline-flex flex-row items-center relative rounded border border-neutral-700 hover:border-accent font-medium mt-2 mb-2 mr-5 bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50">
+       <a class="px-2 py-1 text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400" href="{{ tag.permalink | safe }}">
+         {{tag.name}}
+        </a>
+        <a class="inline-flex items-center h-full border-neutral-700 border-l px-2 bg-neutral-300 rounded-r dark:bg-neutral-800 text-sm font-semibold" href="{{ tag.permalink | safe }}">
+          {{ tag.pages | length }}
+        </a>
+      </div>
+     {% endfor %}
+    </div>
+{% endblock content %}

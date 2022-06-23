@@ -1,0 +1,57 @@
+{% macro default_pagination() %}
+{% if paginator.previous or paginator.next %}
+<div class="flex justify-center">
+  <nav aria-label="pagination">
+    <ul class="flex list-style-none">
+      {% if not paginator.previous %}
+      {# if Disabled #}
+      <li class="page-item">
+        <a class="inline-flex flex-row items-center relative rounded border border-neutral-700 font-medium mt-2 mb-2 mr-5 bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50" href="#" aria-label="Previous">
+          <span class="px-4 py-2 text-lg font-medium hover:text-primary-600 dark:hover:text-primary-400">
+            &laquo;
+          </span>
+          </a>
+        </li>
+        {% else %}
+      {# Active #}
+      <li class="page-item">
+        <a class="inline-flex flex-row items-center relative rounded border border-neutral-700 hover:border-accent font-medium mt-2 mb-2 mr-5 bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50" href="{{ paginator.previous }}" aria-label="Previous">
+          <span aria-hidden="true" class="px-4 py-2 text-lg font-medium hover:text-primary-600 dark:hover:text-primary-400">
+            &laquo;
+          </span>
+          </a>
+        </li>
+      {% endif %}
+      {% for pager in range(start=1, end=paginator.number_pagers+1) %}
+      <li class="page-item">
+        <a class="inline-flex flex-row items-center relative rounded border {% if paginator.current_index == pager %}border-orange-500{% else %}border-neutral-700 hover:border-accent{% endif %} font-medium mt-2 mb-2 mr-5 bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50" href="{{ paginator.base_url }}{{pager}}" aria-label="Page {{pager}}">
+          <span aria-hidden="true" class="px-4 py-2 text-lg font-medium hover:text-primary-600 dark:hover:text-primary-400">
+            {{pager}}
+          </span>
+          </a>
+        </li>
+      {% endfor %}
+      {% if not paginator.next %}
+      {# Disabled #}
+      <li class="page-item">
+        <a class="inline-flex flex-row items-center relative rounded border border-neutral-700 font-medium mt-2 mb-2 mr-5 bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50" href="#" aria-label="Next">
+          <span class="px-4 py-2 text-lg font-medium hover:text-primary-600 dark:hover:text-primary-400">
+            &raquo;
+          </span>
+          </a>
+        </li>
+      {% else %}
+      {# Active #}
+      <li class="page-item">
+        <a class="inline-flex flex-row items-center relative rounded border border-neutral-700 hover:border-accent font-medium mt-2 mb-2 mr-5 bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50" href="{{ paginator.next }}" aria-label="Next">
+          <span aria-hidden="true" class="px-4 py-2 text-lg font-medium hover:text-primary-600 dark:hover:text-primary-400">
+            &raquo;
+          </span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endif %}
+{% endmacro default_pagination %}

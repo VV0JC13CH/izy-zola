@@ -1,0 +1,114 @@
+{% macro card_with_image(page) %}
+{#------------------------- projects_vars ------------------#}
+{% if page.extra.homepage or page.extra.repository %}{% set page_is_project = true %}{% endif %}
+{% if page_is_project and not page.content %}{% set page_permalink = page.extra.repository | default(value=page.extra.homepage) %}{% else %}{% set page_permalink = page.permalink %}{% endif %}
+{#------------------------- project_vars -------------------#}
+{% set page_relative_path_array = page.relative_path | split(pat="/")  %}
+{% set feature_image = config.base_url ~ "/" ~ page_relative_path_array[0] ~ "/" ~ page.extra.feature_image %}
+<div class="group w-full bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50">
+   <a class="c-card block bg-transparent rounded-lg overflow-hidden transform transition duration-500 group-hover:scale-105" href="{{ page_permalink }}">
+      <div class="relative pb-60 max-h-4 rounded-lg overflow-hidden">
+         <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; opacity: 1; border: 0px none; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+         <img alt="Cover image for {{ page.title }}" sizes="50vw" src="{{ feature_image }}" decoding="async" data-nimg="fill" class="absolute inset-0 h-full w-full opacity-80 dark:opacity-70 object-cover transform transition duration-700 group-hover:scale-110 group-hover:opacity-100">
+         </span>
+      </div>
+      <div class="py-4">
+         <span class="w-full inline-flex justify-between items-center">
+         <span class="inline-block py-1 px-2 rounded border border-neutral-700 text-xs font-medium">{{ page.taxonomies.tags[0] }}</span>
+         <time datetime="{{ page.date | date(format='%B %d, %Y') }}" class="text-sm text-neutral-500 font-semibold">
+         {{ page.date | date(format='%B %d, %Y') }}
+         </time>
+         </span>
+         <h2 class="mt-2 mb-2 md:text-xl font-bold">{{ page.title }}</h2>
+         <p class="text-sm text-neutral-600 dark:text-neutral-300 tracking-wider">
+            {% if page.description %}{{ page.description }}{% else %}{% if page.summary %}{{ page.summary }}{% endif %}{% endif %}
+         </p>
+      </div>
+   </a>
+</div>
+{% endmacro card_with_image %}
+{% macro card_without_image(page) %}
+{#------------------------- projects_vars ------------------#}
+{% if page.extra.homepage or page.extra.repository %}{% set page_is_project = true %}{% endif %}
+{% if page_is_project and not page.content %}{% set page_permalink = page.extra.homepage | default(value=page.extra.repository) %}{% else %}{% set page_permalink = page.permalink %}{% endif %}
+{#------------------------- project_vars -------------------#}
+<a class="relative p-px rounded border border-neutral-200 dark:border-neutral-700 bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50 flex flex-wrap transform transition duration-500 cursor-pointer group hover:scale-105" href="{{ page_permalink }}">
+   <div class="absolute bottom-0 left-0 w-full h-0.5 duration-300 origin-left transform scale-x-0 bg-accent group-hover:scale-x-100"></div>
+   <div class="absolute bottom-0 left-0 w-0.5 h-full duration-300 origin-bottom transform scale-y-0 bg-accent group-hover:scale-y-100"></div>
+   <div class="absolute top-0 left-0 w-full h-0.5 duration-300 origin-right transform scale-x-0 bg-accent group-hover:scale-x-100"></div>
+   <div class="absolute bottom-0 right-0 w-0.5 h-full duration-300 origin-top transform scale-y-0 bg-accent group-hover:scale-y-100"></div>
+   <div class="relative w-full p-4 space-y-2 bg-light dark:bg-dark">
+      <span class="w-full inline-flex justify-between items-center">
+         <span>
+            <h2 class="mt-1 mb-1 md:text-xl font-bold">{{ page.title }}</h2>
+         </span>
+         {% if page_is_project %}
+         <span class="flex flex-row gap-1 items-center">{{ cards::project_details(page=page)}}</span>
+         {% endif %}
+      </span>
+      <span class="w-full inline-flex justify-between items-center">
+      <span class="inline-block py-1 px-2 rounded border border-neutral-700 text-xs font-medium">{{ page.taxonomies.tags[0] }}</span>
+      <time datetime="{{ page.date | date(format='%B %d, %Y') }}" class="text-sm text-neutral-500 font-semibold">
+      {{ page.date | date(format='%B %d, %Y') }}
+      </time>
+      </span>
+      <p class="text-sm text-neutral-600 dark:text-neutral-300 tracking-wider">
+         {% if page.description %}{{ page.description }}{% else %}{% if page.summary %}{{ page.summary }}{% endif %}{% endif %}
+      </p>
+   </div>
+</a>
+{% endmacro card_without_image %}
+{% macro default_card(page) %}
+{% if page.extra.feature_image %}
+{{ cards::card_with_image(page=page) }}
+{% else %}
+{{ cards::card_without_image(page=page) }}
+{% endif %}
+{% endmacro default_card %}
+{% macro project_details(page) %}
+{% if page.extra.homepage %} 
+<div class="inline-block py-2 px-2 rounded border border-neutral-200 dark:border-neutral-700" >
+   <svg viewBox="0 0 24 24" fill="currentColor" class="mr-1 w-7 h-7">
+      <a href="{{ page.extra.homepage }}" >
+         <rect width="100%" height="100%" fill="transparent"></rect>
+         {{ icons::default_icon(url=page.extra.homepage,format='path_only') }}
+      </a>
+   </svg>
+</div>
+{% endif %}
+{% if page.extra.repository %}
+<div class="inline-block py-2 px-2 rounded border border-neutral-200 dark:border-neutral-700">
+   <svg viewBox="0 0 24 24" fill="currentColor" class="mr-1 w-7 h-7">
+      <a href="{{ page.extra.repository }}">
+         <rect width="100%" height="100%" fill="transparent"></rect>
+         {{ icons::default_icon(url=page.extra.repository,format='path_only') }}
+      </a>
+   </svg>
+</div>
+{% endif %}
+{% endmacro project_details %}
+{% macro grid(parent_section) %}
+{% if section.subsections %}
+{% for subsection in section.subsections %}
+{% if loop.index <= 3 %}
+{% set section = get_section(path=subsection) %}
+{% set pages = section.pages %}
+<div class="flex flex-col gap-4">
+   <div class="flex flex-col gap-1">
+      <span class="text-3xl font-black font-bold title-font">{{ section.title }}</span>
+      <span class="inline-block h-0.5 w-20 rounded bg-accent mb-4 mt-0"></span>
+   </div>
+   {% for page in pages %}
+   {% if page.extra.feature_image %}
+   {% if loop.index == 1 %}
+   {{ cards::default_card(page=page) }}
+   {% endif %}
+   {% elif loop.index <= 3 %}
+   {{ cards::default_card(page=page) }}
+   {% endif %}
+   {% endfor %}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endmacro grid %}

@@ -1,0 +1,24 @@
+{% if config.extra.sidebar.position != 'left'%}
+<div class="flex flex-row-reverse">
+   {% set sidebar_properties = 'translate-x-[200%]' %}
+   {% else %}  
+   {% set sidebar_properties = '-translate-x-full' %}
+   {% endif %}
+   <div class="w-60 h-full bg-light dark:bg-dark shadow-md  {{ sidebar_properties }} flex flex-col hidden 2xl:block fixed overflow-auto" id="sidebar" data-position="{{ config.extra.sidebar.position }}">
+      <div class="pt-4 pb-2 px-6">
+         <a href="#!">
+            <div class="flex items-center">
+               <div class="shrink-0">
+                  <img src="{{ config.extra.favicon }}" class="rounded-full w-10" alt="Avatar">
+               </div>
+               <div class="grow ml-3">
+                  <p class="text-sm font-semibold text-primary-color dark:text-primary-color-dark">{{ titles::default_title() }}</p>
+               </div>
+            </div>
+         </a>
+      </div>
+      {{ sidebar::get_categories() }}
+   </div>
+   {% if config.extra.sidebar.position %}
+</div>
+{% endif%}

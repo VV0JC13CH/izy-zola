@@ -1,0 +1,159 @@
+{% import "macros.html" as macros %}
+<!DOCTYPE html>
+<html class="dark" style="color-scheme: dark;" lang="{{lang}}">
+   <head>
+      {#------------------------- SCRIPTS/BEGIN -------------------------#}
+      <script type="text/javascript" src="{{ get_url(path="js/main.js") | safe }}" defer></script>
+      {% if config.build_search_index %}
+      <script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") | safe }}" defer></script>
+      <script type="text/javascript" src="{{ get_url(path="search_index." ~ lang ~ ".js") | safe }}" defer></script>
+      <script type="text/javascript" src="{{ get_url(path="js/search.js") | safe }}" defer></script>
+      {% endif %}
+      {% if config.extra.sidebar.enabled %}
+      <script type="text/javascript" src="{{ get_url(path="js/sidebar.js") | safe }}" defer></script>
+      {% endif %}
+      {% if config.extra.enable_multilingue %}
+      <script type="text/javascript" src="{{ get_url(path="js/lang.js") | safe }}" defer></script>
+      {% endif %}
+      {% block extra_js %}
+      {% endblock extra_js %}
+      {#------------------------- SCRIPTS/END ---------------------------#}
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      {#-- FAVICON --#}
+      {% if config.extra.favicon %}
+      <link href='{{ config.extra.favicon }}' rel="icon" />
+      {% endif %}
+      <link href="{{ config.base_url }}/css/main.css" rel="stylesheet" type="text/css">
+      <link id="syntax_highlight" href="#" rel="stylesheet">
+      <title>
+         {% block title %}
+         {{ titles::default_title() }} :: {{ config.title }}
+         {% endblock title %}
+      </title>
+   </head>
+   <body class="antialiased text-neutral-800 bg-light dark:bg-dark dark:text-white">
+      {% if config.extra.sidebar.enabled %}{% block sidebar %}{% include "sidebar.html" %}{% endblock sidebar %}{% endif %}
+      <div class="max-w-3xl px-4 mx-auto sm:px-6 xl:max-w-5xl xl:px-0">
+      <div class="flex flex-col justify-between h-screen">
+      {#----------------------------------------------------------#}
+      {#------------------------- HEADER/BEGIN -------------------#}
+      {#----------------------------------------------------------#}
+      <header class="flex items-center gap-4 flex-col sm:flex-row justify-between pt-10 md:pb-10">
+         <div class="flex text-base max-w-lg">
+            <a aria-label="{{config.extra.navbar.title}}"  class="self-center" href="/{% if lang != config.default_language %}{{lang}}{% endif %}">
+               <div class="flex items-center justify-between text-xl font-semibold text-primary-color dark:text-primary-color-dark">
+                  {% if current_path and current_path != '/' %}
+                  ~{{current_path | trim_end_matches(pat="/")}}$
+                  {% elif current_path and current_path == '/'%}
+                  ~{{current_path}}$
+                  {% else %}
+                  ~/top_secret/half-life3
+                  {% endif %}
+                  <div class="Cursor"><span class="Cursor"></span><span class="Cursor">|</span></div>
+               </div>
+            </a>
+         </div>
+         {#----------------------------------------------------------#}
+         {#------------------------- NAVBAR/BEGIN -------------------#}
+         {#----------------------------------------------------------#}
+         <div class="flex items-center text-base leading-5">
+            <div class="nav-links">
+               {% for item in config.extra.navbar.items %}
+               {% if lang == item.lang %}
+               {% for link in item.links %}
+               <a href="{{ link.url }}" class="hover-underline-animation p-2 inline-flex flex-row text-neutral-900 dark:text-neutral-100 font-medium">
+               {{ icons::default_icon(url=link.url) }}
+               {{ link.name }}
+               </a>
+               {% endfor %}
+               {% endif %}
+               {% endfor %}
+            </div>
+            {% if config.extra.sidebar.enabled %}
+            <button class="hidden 2xl:inline-flex 2xl:flex-row p-2  text-neutral-900 dark:text-neutral-100 font-medium" id="switch-sidebar">
+            {{ icons::svg(icon='sidebar.svg') }}
+            </button>
+            {% endif %}
+         </div>
+         {#----------------------------------------------------------#}
+         {#------------------------- NAVBAR/END---------------------#}
+         {#----------------------------------------------------------#}
+      </header>
+      {#----------------------------------------------------------#}
+      {#------------------------- HEADER/END ---------------------#}
+      {#----------------------------------------------------------#}
+      <main class="mb-auto">
+         {#-----------------------------------------------------------------#}
+         {#------------------------- CONTENT/BEGIN -------------------------#}
+         {#-----------------------------------------------------------------#}
+         <div class="divide-y divide-neutral-300 dark:divide-neutral-700">
+            <div class="flex flex-col sm:flex-row  justify-between lg:pt-6 pb-8 space-y-2 justify-center">
+               <div class="flex justify-center">
+                  <h1 class="hidden md:block text-3xl font-bold leading-9 tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 capitalize">{{ titles::default_title() }}</h1>
+               </div>
+               <div class="flex items-center place-items-center">
+                  {% if config.build_search_index %}
+                  <div class="flex-none">
+                     <form class="relative hidden lg:block">
+                        <input id="userinput" aria-label="Search" autocomplete="off" type="text" placeholder="Search" class="block lg:w-full px-4 py-2 text-neutral-900 bg-white border border-neutral-300 rounded-md dark:border-neutral-900 focus:ring-orange-600  focus:border-accent dark:bg-neutral-800 dark:text-neutral-100">
+                        <svg class="absolute lg:w-5 h-5 text-neutral-400 right-3 top-3 dark:text-neutral-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           {{ icons::path(icon='search.svg') }}
+                        </svg>
+                     </form>
+                     <div id="suggestions" class="absolute overflow-auto place-self-start flex-none max-h-52 z-10 py-2 bg-light dark:bg-dark text-neutral-900  border-neutral-300 rounded-md dark:border-neutral-900 focus:border-accent dark:text-neutral-100"></div>
+                  </div>
+                  {% endif %}
+                  <div class="grow flex justify-center">
+                     {% if config.extra.enable_multilingue %}
+                     <button id="switch-language" title="Toggle Dark Mode" aria-label="Toggle Dark Mode" type="button" class="w-8 h-8 p-1 ml-1 mr-1 rounded dark:hover:bg-neutral-600 hover:bg-neutral-300 hover:rounded-full">
+                        {{ icons::svg(icon='text.svg') }}
+                        <div id="language-panel" class="absolute z-20 mt-4 hidden rounded-lg divide-y bg-neutral-100 dark:bg-dark text-neutral-900  border-neutral-300 rounded-md dark:border-neutral-900 focus:border-accent dark:text-neutral-100 w-28 ">
+                           <span class="sr-only">Switch Lang</span>
+                           {% for item in config.extra.lang.items %}
+                           {% if lang == item.lang %}
+                           {% for link in item.links %}
+                           <a class="flex justify-center py-2 hover:text-gray-800 dark:hover:text-white" href="{{ link.base_url }}">{{ link.name }}</a>
+                           {% endfor %}
+                           {% endif %}
+                           {% endfor %}
+                        </div>
+                     </button>
+                     {% endif %}
+                     <button id="switch-theme" title="Toggle Dark Mode" aria-label="Toggle Dark Mode" type="button" class="w-8 h-8 p-1 ml-1 mr-1 rounded dark:hover:bg-neutral-600 hover:bg-neutral-300 hover:rounded-full">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="text-neutral-900 dark:text-neutral-100">
+                           {{ icons::path(icon='lightbulb_on.svg') }}
+                           {{ icons::path(icon='lightbulb_off.svg') }}
+                        </svg>
+                     </button>
+                  </div>
+               </div>
+            </div>
+            {% block content %}
+            {% endblock content %}
+         </div>
+         {#-----------------------------------------------------------------#}
+         {#------------------------- CONTENT/END ---------------------------#}
+         {#-----------------------------------------------------------------#}
+      </main>
+      {% block pagination %}
+      {% endblock%}
+      <footer class="border-t border-neutral-400 dark:border-neutral-700">
+         {#----------------------------------------------------------#}
+         {#------------------------- FOOTER/BEGIN -------------------#}
+         {#----------------------------------------------------------#}
+         <div class="flex flex-row flex-wrap items-center justify-between md:justify-between my-8">
+            <div class="text-sm text-black dark:text-white mb-2">
+               Powered by <a href="https://www.getzola.org/" target="_blank">Zola</a> | Theme: <a href="https://github.com/VV0JC13CH/izy_zola" target="_blank">izy_zola</a> 
+            </div>
+            <div class="flex space-x-2 text-sm text-neutral">
+               {{ icons::social(social_links=config.extra.social.links) }}
+               {% if config.generate_feed %}
+               <div> • </div>
+               <a target='_blank' href='{{ get_url(path=config.feed_filename, trailing_slash=false) }}' rel="alternate" type="application/rss+xml" title="RSS" class='icon-link'>
+               {{ icons::svg(icon='rss.svg') }}
+               </a>
+               {% endif %}
+            </div>
+         </div>
+      </footer>

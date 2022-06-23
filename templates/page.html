@@ -1,0 +1,128 @@
+{% extends "layout.html" %}
+{% block extra_js %}
+<script type="text/javascript" src="{{ get_url(path="js/page.js") | safe }}" defer></script>
+{% endblock extra_js %}
+{% block content %}
+<div class="max-w-3xl px-4 mx-auto sm:px-6 xl:max-w-5xl xl:px-0">
+   <div class="flex-row-reverse">
+      <div class="fixed flex-col hidden gap-3 right-8 bottom-8 md:flex">
+         <button title="Scroll To Top" aria-label="Scroll To Top" id="btn-back-to-top" type="button"  class="w-8 h-8 p-1 ml-1 mr-1 sm:ml-4 hidden text-neutral-500 transition-all rounded-full dark:text-neutral-400 dark:hover:bg-neutral-600 hover:bg-neutral-300">
+         {{ icons::svg(icon='M7.41,18.41L6,17L12,11L18,17L16.59,18.41L12,13.83L7.41,18.41M7.41,12.41L6,11L12,5L18,11L16.59,12.41L12,7.83L7.41,12.41Z') }}
+         </button>
+      </div>
+   </div>
+   <article>
+      <div>
+         <header class="py-4 flex flex-col items-start space-y-4  border-double border-neutral-400 dark:border-neutral-700">
+            <div class="w-full flex flex-wrap gap-4 items-center place-content-between">
+               {% if page.taxonomies.tags or page.taxonomies.categories %}
+               <div class="-mx-2">
+                  {% if page.taxonomies.categories %}
+                  {% for category in page.taxonomies.categories %}
+                  <a href="{{ get_taxonomy_url(kind='categories', name=category) }}">
+                  <span class="inline-block py-1 px-2 mx-2 rounded border border-neutral-700 hover:border-accent text-xs font-medium">{{category}}</span>
+                  </a>
+                  {% endfor %}
+                  {% endif %}
+                  {% if page.taxonomies.tags %}
+                  {% for tag in page.taxonomies.tags %}
+                  <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">
+                  <span class="inline-block py-1 px-2 mx-2 rounded border border-neutral-700 hover:border-accent text-xs font-medium">{{tag}}</span>
+                  </a>
+                  {% endfor %}
+                  {% endif %}
+               </div>
+               {% endif %}
+               <dl>
+                  <div class="flex flex-row items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                     <dt class="sr-only">Published on</dt>
+                     <dd class=""><time datetime="{{ page.date }}">Published on {{ page.date | date(format='%B %d, %Y') }}</time></dd>
+                     • <span>{{ page.reading_time }} min read</span>
+                  </div>
+               </dl>
+            </div>
+         </header>
+         {% if page.extra.feature_image %}
+         {% set page_relative_path_array = page.relative_path | split(pat="/")  %}
+         {% set feature_image = config.base_url ~ "/" ~ page_relative_path_array[0] ~ "/" ~ page.extra.feature_image %}
+         <div class="relative flex flex-col items-center">
+            <img alt="Cover image for {{ page.title }}" class="object-cover md:w-3/4 rounded-lg shadow-lg overflow-hidden my-4 mx-auto" src="{{ feature_image }}">
+         </div>
+         {% endif %}
+         <div class="flex flex-col">
+            <div class="xl:grid xl:grid-cols-4 xl:gap-x-6 bg-light border-1 border-day dark:border-night dark:bg-dark bg-opacity-50 dark:bg-opacity-75" style="grid-template-rows: auto 1fr;">
+               <div class="xl:col-span-3 xl:row-span-2 pt-10 pb-8 prose dark:prose-dark max-w-none">
+                  {{ page.content | safe }}
+               </div>
+               {% if page.toc %}   
+               {% block toc %}
+               <div class="hidden xl:block sticky top-4 xl:top-8" id="toc">
+                  <div class="px-2 pl-10 mb-4 text-sm tracking-tight text-neutral-500 dark:text-neutral-500">
+                     <p class="text-xl mb-4 font-bold">Read about</p>
+                     <div class="transform transition duration-500 ease-in-out mt-1 space-y-1">
+                        <div class="PageScroll_progress-wrapper bg-neutral-300 dark:bg-neutral-500" style="opacity: 0.5;">
+                           <div class="PageScroll_progress-track bg-neutral-500 dark:bg-neutral-300" id="scrollspy"></div>
+                        </div>
+                        <div id="tocspy">
+                           {% for h1 in page.toc %}
+                           <div class="transition-all duration-500 ease-in-out">
+                              <a href="{{ h1.permalink | safe }}" class="active-link ">
+                                 <p data-before="#" class="pl-2 relative">{{ h1.title }}</p>
+                              </a>
+                              {% if h1.children %}
+                              <div class="mt-1 ml-4 space-y-1">
+                                 {% for h2 in h1.children %}
+                                 <div class="transition-all duration-500 ease-in-out">
+                                    <a href="{{ h2.permalink | safe }}" class="active-link" data-parent-url="{{ h1.permalink | safe }}">
+                                       <p data-before="#" class="pl-2 relative">{{ h2.title }}</p>
+                                    </a>
+                                    {% if h2.children %}
+                                    <div class="mt-1 ml-4 space-y-1">
+                                       {% for h3 in h2.children %}
+                                       <div class="transition-all duration-500 ease-in-out">
+                                          <a href="{{ h3.permalink | safe }}" class="active-link" data-parent-url="{{ h2.permalink | safe }}">
+                                             <p data-before="#" class="pl-2 relative">{{ h3.title }}</p>
+                                          </a>
+                                       </div>
+                                       {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                 </div>
+                                 {% endfor %}
+                              </div>
+                              {% endif %}
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% endblock %}
+               {% endif %}
+            </div>
+            <div class="border-b border-t py-4 border-neutral-400 dark:border-neutral-700 text-sm">to-do: share section</div>
+            {{ comments::comments_section(page=page) }}
+            {% if page.earlier or page.later or page.lighter or page.heavier %}
+            <div class="flex flex-col my-4"><span class="text-3xl font-black font-poppins font-bold title-font">Read More</span><span class="inline-block h-0.5 w-20 rounded bg-accent mb-4"></span></div>
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-2">
+               {% block read_more %}
+               {% if page.later %}
+               {{ cards::default_card(page=page.later) }}
+               {% endif %}
+               {% if page.earlier %}
+               {{ cards::default_card(page=page.earlier) }}
+               {% endif %}
+               {% if page.lighter %}
+               {{ cards::default_card(page=page.lighter) }}
+               {% endif %}
+               {% if page.heavier %}
+               {{ cards::default_card(page=page.heavier) }}
+               {% endif %}
+               {% endblock %}
+            </div>
+            {% endif %}
+         </div>
+      </div>
+   </article>
+   {% endblock %}
+</div>

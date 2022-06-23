@@ -1,0 +1,101 @@
+name = "izy_zola"
+description = "A Zola theme made with tailwindcss"
+license = "MIT"
+homepage = "https://github.com/VV0JC13CH/izy_zola"
+# The minimum version of Zola required
+min_version = "0.9.0"
+# An optional live demo URL
+demo = ""
+
+# The theme author info: you!
+[author]
+name = "VV0JC13CH"
+homepage = "https://bitstudio.dev"
+
+# Any variable there can be overridden in the end user `config.toml`
+# You don't need to prefix variables by the theme name but as this will
+# be merged with user data, some kind of prefix or nesting is preferable
+# Use snake_casing to be consistent with the rest of Zola
+[extra]
+favicon = "/ico/favicon.ico"
+enable_search = false
+enable_multilingue = true
+
+
+[extra.lang]
+items = [
+    { lang = "en", links = [
+        { base_url = "/", name = "English" },
+        { base_url = "/pl", name = "Polish" }
+    ] },
+    { lang = "pl", links = [
+        { base_url = "/", name = "Angielski" },
+        { base_url = "/pl", name = "Polski" }
+    ] }
+]
+[extra.navbar]
+title = ""
+items = [
+    { lang = "en", links = [
+        { url = "/assets", name = "Assets"},
+        { url = "/blog", name = "Blog"},
+        { url = "/snippets", name = "Snippets"},
+        { url = "/projects", name = "Projects"},
+    ] },
+    { lang = "pl", links = [
+        { url = "/pl/assets", name = "Assety"},
+        { url = "/pl/blog", name = "Blog"},
+        { url = "/pl/snippets", name = "Kod"},
+        { url = "/pl/projects", name = "Projekty"},
+    ] }
+]
+
+[extra.sidebar]
+enabled = true
+show_categories = true
+position = 'right' # left / right
+custom_items = [
+    { lang = "en", links = [
+        { url = "/markdown", name = "Markdown" },
+        { url = "/blog", name = "Blog" }
+    ] },
+    { lang = "pl", links = [
+        { url = "/pl/markdown", name = "Markdown" },
+        { url = "/pl/blog", name = "Blog" }
+    ] }
+]
+
+[extra.social]
+links = [
+{github = "https://github.com/johndoe"},
+{gitlab = "https://gitlab.com/johndoe"},
+{twitter = "https://twitter.com/johndoe"},
+{linkedin = "https://www.linkedin.com/in/john-doe-b1234567/"},
+]
+
+
+[extra.icons]
+# id = {icon = "<path />", lookup = "phrase_1,phrase_2,phrase_n"}
+# theme search for phrases in slugs and urls ans assign icons to links
+brackets = {icon = "brackets.svg", lookup="snippets"}
+book = {icon = "book.svg", lookup="blog"}
+download = {icon = "download.svg", lookup="assets"}
+external_link = {icon = "external_link.svg", lookup="url"}
+folder = {icon = "folder.svg", lookup="projects"}
+git = {icon = "git.svg", lookup="git"}
+tag = {icon = "tag.svg", lookup="tag"}
+lightbulb_on = {icon = "lightbulb_on.svg", lookup="light"}
+lightbulb_off = {icon = "lightbulb_off.svg", lookup="dark"}
+rss = {icon = "rss.svg", lookup="rss"}
+search = {icon = "search.svg", lookup="search"}
+sidebar = {icon = "sidebar.svg", lookup="sidebar"}
+bitbucket = {icon = "social_bitbucket.svg", lookup="bitbucket"}
+discord = {icon = "social_discord.svg", lookup="discord"}
+facebook = {icon = "social_facebook.svg", lookup="facebook"}
+github = {icon = "social_github.svg", lookup="github"}
+gitlab = {icon = "social_gitlab.svg", lookup="gitlab"}
+instagram = {icon = "social_instagram.svg", lookup="instagram"}
+linkedin = {icon = "social_linkedin.svg", lookup="linkedin"}
+twitter = {icon = "social_twitter.svg", lookup="twitter"}
+youtube = {icon = "social_youtube.svg", lookup="youtube"}
+text = {icon = "text.svg", lookup="text"}

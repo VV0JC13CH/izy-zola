@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container mx-auto py-8">
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+        {% if paginator %}
+        {% set pages = paginator.pages %}
+        {% else %}
+        {% set pages = term.pages %}
+        {% endif %}
+        {% for page in pages %}{{ cards::default_card(page=page) }}{% endfor %}
+        {{ cards::grid(parent_section=term) }}
+        </div>
+    </div>
+{% endblock %}
+{% block pagination %}
+{{ pagination::default_pagination() }}
+{% endblock %}
+
+

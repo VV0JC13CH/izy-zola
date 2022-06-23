@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block extra_js %}
+<script defer src="/js/search.js"></script>
+{% endblock extra_js %}
+{% block content %}
+   
+   <div class="container mx-auto py-8">
+      {% set xl_grid_cols = section.extra.columns | default(value=3) %}
+      {% set md_grid_cols = section.extra.columns | default(value=2) %}
+      <div  class="grid gap-8 grid-cols-1 md:grid-cols-{{ md_grid_cols | round }} xl:grid-cols-{{ xl_grid_cols }}">
+         {% if paginator %}
+         {% set pages = paginator.pages %}
+         {% else %}
+         {% set pages = section.pages %}
+         {% endif %}
+         {% for page in pages %}
+         {{ cards::default_card(page=page) }}
+         {% endfor %}
+      </div>
+   </div>
+{% endblock content %}

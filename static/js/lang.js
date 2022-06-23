@@ -1,0 +1,1 @@
+function switchLang(e){document.getElementById("language-panel").classList.toggle("hidden")}document.addEventListener("DOMContentLoaded",function(){document.getElementById("switch-language")?.addEventListener("click",switchLang)});

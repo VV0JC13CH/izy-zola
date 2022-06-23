@@ -1,0 +1,43 @@
+{% macro get_categories() %}
+{% set categories = get_taxonomy(kind="categories") %}
+{% for category in categories.items %}
+<ul class="relative px-1">
+    <li class="relative">
+      <a onclick="show_hide('cat_{{ category.name }}')" class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-primary-color dark:text-primary-color-dark text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out cursor-pointer">
+        {{ icons::default_icon(url=category.slug) }}
+        {{category.name}}
+      </a>
+        <ul class="relative hidden" id="cat_{{ category.name }}">
+            {{ sidebar::get_pages(category=category.name) }}
+        </ul>
+    </li>
+</ul>
+{% endfor %}
+{% endmacro get_categories %}
+
+{% macro get_pages(category) %}
+
+{% if lang == config.default_language %}
+{% set _section = get_section(path="_index.md") %}
+{% else %}
+{% set _path = ['_index.', lang, '.md'] | join(sep='') %}
+{% set _section = get_section(path=_path) %}
+{% endif %}
+
+{% if _section.subsections %}
+      {% for subsection in _section.subsections %}
+      {% set section = get_section(path=subsection) %}
+      {% set pages = section.pages %}
+
+         {% for page in pages %}
+            {% if category in page.taxonomies.categories %}
+                <li class="relative">
+                  <a href="{{page.path}}" onclick="switchSidebar()" class="flex items-center text-xs py-4 pl-8 pr-6 h-6 overflow-hidden text-primary-color dark:text-primary-color-dark text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out">
+                    {{ page.title }}
+                  </a>
+                </li>
+            {% endif %}
+         {% endfor %}
+      {% endfor %}
+{% endif %}
+{% endmacro get_pages %}

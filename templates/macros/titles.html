@@ -1,0 +1,11 @@
+{% macro default_title() %}
+{% if section.title %}
+{{ section.title }}
+{% elif page.title %}
+{{ page.title }}
+{% elif term.name %}
+{{ term.name }}
+{% elif taxonomy.name %}
+{{ taxonomy.name }}
+{% endif %}
+{% endmacro default_title %}
