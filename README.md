@@ -1,4 +1,4 @@
-### izy_zola
+# izy-zola
 ### Features
 
 Legend:
@@ -29,13 +29,13 @@ Legend:
 1. It is recommended to add this theme as a git submodule in your zola project:  
 ```bash
 cd zola-project
-git submodule add -b main git@github.com:VV0JC13CH/izy_zola.git themes/izy_zola
+git submodule add -b main git@github.com:VV0JC13CH/izy-zola.git themes/izy-zola
 ```
 
 2. Change below parameter in your `config.toml` file:
 ```toml
 # The site theme to use.
-theme = "izy_zola"
+theme = "izy-zola"
 ```
 
 3. Overwrite default values of theme by editing your zola main `config.toml` file:

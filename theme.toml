@@ -1,7 +1,7 @@
-name = "izy_zola"
+name = "izy-zola"
 description = "A Zola theme made with tailwindcss"
 license = "MIT"
-homepage = "https://github.com/VV0JC13CH/izy_zola"
+homepage = "https://github.com/VV0JC13CH/izy-zola"
 # The minimum version of Zola required
 min_version = "0.9.0"
 # An optional live demo URL
