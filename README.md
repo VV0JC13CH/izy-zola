@@ -1,10 +1,10 @@
-# izy-zola
+# Izy - Zola Theme
+
+Live demo: https://izy-zola.netlify.app/
+
 ### Features
 
 Legend:
-- [x] Done
-- [ ] to-do
-
 - [ ] Analytics
 - [ ] Charts
 - [ ] Comments
@@ -51,7 +51,58 @@ to-do
 
 #### Multilingual sites
 
-to-do
+1. Set below flag to true (required)
+```toml
+[extra]
+enable_multilingue = true
+```
+2. Add your language to config.toml (required)
+```toml
+[extra.lang]
+items = [
+    { lang = "en", links = [
+        { base_url = "/", name = "English" },
+        { base_url = "/pl", name = "Polish" }
+    ] },
+    { lang = "pl", links = [
+        { base_url = "/", name = "Angielski" },
+        { base_url = "/pl", name = "Polski" }
+    ] }
+]
+```
+3. Customize your navbar (optional)
+```toml
+[extra.navbar]
+items = [
+    { lang = "en", links = [
+        { url = "/assets", name = "Assets"},
+        { url = "/blog", name = "Blog"},
+        { url = "/snippets", name = "Snippets"},
+        { url = "/projects", name = "Projects"},
+    ] },
+    { lang = "pl", links = [
+        { url = "/pl/assets", name = "Assety"},
+        { url = "/pl/blog", name = "Blog"},
+        { url = "/pl/snippets", name = "Kod"},
+        { url = "/pl/projects", name = "Projekty"},
+    ] }
+]
+```
+4. Customize your sidebar (optional)
+```toml
+[extra.sidebar]
+enabled = true
+custom_items = [
+    { lang = "en", links = [
+        { url = "/markdown", name = "Markdown" },
+        { url = "/blog", name = "Blog" }
+    ] },
+    { lang = "pl", links = [
+        { url = "/pl/markdown", name = "Markdown" },
+        { url = "/pl/blog", name = "Blog" }
+    ] }
+]
+```
 
 ## Contributing
 
