@@ -40,15 +40,61 @@ theme = "izy-zola"
 
 3. Overwrite default values of theme by editing your zola main `config.toml` file:
 ```toml
-to-do
+[extra]
+favicon = "/ico/favicon.ico"
+enable_search = true
+enable_multilingue = false
+
+
+# [extra.lang]
+# items = [
+#     { lang = "en", links = [
+#         { base_url = "/", name = "English" },
+#         { base_url = "/pl", name = "Polish" }
+#     ] },
+#     { lang = "pl", links = [
+#         { base_url = "/", name = "Angielski" },
+#         { base_url = "/pl", name = "Polski" }
+#     ] }
+# ]
+[extra.share]
+enabled = false
+
+[extra.comments]
+enabled = false
+
+[extra.navbar]
+title = ""
+items = [
+    { lang = "en", links = [
+        { url = "/blog", name = "Blog"},
+        { url = "/categories", name = "Categories"},
+        { url = "/tags", name = "Tags"},
+    ] },
+]
+
+[extra.sidebar]
+enabled = false
+show_categories = true
+position = 'right' # left / right
+custom_items = [
+    { lang = "en", links = [
+        { url = "/blog", name = "Blog"},
+        { url = "/categories", name = "Categories"},
+        { url = "/tags", name = "Tags"},
+    ] },
+]
+
+[extra.social]
+links = [
+#{github = "https://github.com/johndoe"},
+#{gitlab = "https://gitlab.com/johndoe"},
+#{twitter = "https://twitter.com/johndoe"},
+#{linkedin = "https://www.linkedin.com/in/john-doe-b1234567/"},
+]
 ```
 
 ### Theme Options
-
-```toml
-to-do
-```
-
 #### Multilingual sites
 
 1. Set below flag to true (required)
@@ -104,6 +150,19 @@ custom_items = [
 ]
 ```
 
+### Syntax highlighting
+In order to use highlught css themes it is reguired to add below config.
+Themes to choose: https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting
+```toml
+[markdown]
+# The theme to use for code highlighting.
+highlight_theme = "css"
+highlight_themes_css = [
+  { theme = "visual-studio-dark", filename = "syntax-dark.css" },
+  { theme = "cheerfully-light", filename = "syntax-light.css" },
+]
+```
+
 ## Contributing
 
 1. Fork the Project
@@ -118,8 +177,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-to-do
+- wojciech@bitstudio.dev
+- https://twitter.com/VV0JC13CH
 
-## Inspirations
+## Inspirations:
 
-to-do
+* https://www.taniarascia.com
+* https://github.com/timlrx/tailwind-nextjs-starter-blog

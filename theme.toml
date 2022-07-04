@@ -33,6 +33,9 @@ enable_multilingue = false
 #         { base_url = "/pl", name = "Polski" }
 #     ] }
 # ]
+[extra.share]
+enabled = false
+
 [extra.comments]
 enabled = false
 
@@ -69,6 +72,7 @@ links = [
 
 [extra.icons]
 # id = {icon = "<path />", lookup = "phrase_1,phrase_2,phrase_n"}
+# if icon won't be found, script will treat icon value as a "d" param of 24x24 <path />
 # theme search for phrases in slugs and urls ans assign icons to links
 brackets = {icon = "brackets.svg", lookup="snippets"}
 book = {icon = "book.svg", lookup="blog"}

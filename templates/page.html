@@ -101,7 +101,9 @@
                {% endblock %}
                {% endif %}
             </div>
+            {% if config.extra.share.enabled %}
             <div class="border-b border-t py-4 border-neutral-400 dark:border-neutral-700 text-sm">to-do: share section</div>
+            {% endif %}
             {% if config.extra.comments.enabled %}
             {{ comments::comments_section(page=page) }}
             {% endif %}

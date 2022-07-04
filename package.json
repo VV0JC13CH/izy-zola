@@ -2,28 +2,21 @@
   "name": "izy-zola",
   "version": "0.1.0",
   "description": "Zola theme for tech blogs.",
-  "scripts": {
-    "uglify": "uglifyjs ./src/js/main.js --compress --mangle -o ./static/js/main.js && uglifyjs ./src/js/page.js --compress --mangle -o ./static/js/page.js && uglifyjs ./src/js/search.js --compress --mangle -o ./static/js/search.js && uglifyjs ./src/js/lang.js --compress --mangle -o ./static/js/lang.js && uglifyjs ./src/js/sidebar.js --compress --mangle -o ./static/js/sidebar.js",
-    "watch": "NODE_ENV=development postcss ./src/css/main.css -o ./static/css/main.css -w --verbose",
-    "dev": "npm run uglify && NODE_ENV=development postcss ./src/css/main.css -o ./static/css/main.css --verbose",
-    "prod": "npm run uglify && NODE_ENV=production postcss ./src/css/main.css -o ./static/css/main.css --verbose"
-  },
+  "homepage": "https://github.com/VV0JC13CH/izy-zola#readme",
+  "author": "Wojciech Bobrowski",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VV0JC13CH/izy-zola"
   },
-  "keywords": [
-    "izola",
-    "zola",
-    "tailwindcss",
-    "VV0JC13CH"
-  ],
-  "author": "Wojciech Bobrowski",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/VV0JC13CH/izy-zola/issues"
   },
-  "homepage": "https://github.com/VV0JC13CH/izy-zola#readme",
+  "keywords": [
+    "izy",
+    "zola",
+    "tailwindcss"
+  ],
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.2",
@@ -34,5 +27,11 @@
     "tailwindcss": "^3.0.24",
     "uglify-js": "^3.15.4",
     "@mdi/svg": "6.7.96"
+  },
+  "scripts": {
+    "uglify": "uglifyjs ./src/js/main.js --compress --mangle -o ./static/js/main.js && uglifyjs ./src/js/page.js --compress --mangle -o ./static/js/page.js && uglifyjs ./src/js/search.js --compress --mangle -o ./static/js/search.js && uglifyjs ./src/js/lang.js --compress --mangle -o ./static/js/lang.js && uglifyjs ./src/js/sidebar.js --compress --mangle -o ./static/js/sidebar.js",
+    "dev": "npm run uglify && NODE_ENV=development postcss ./src/css/main.css -o ./static/css/main.css --verbose",
+    "prod": "npm run uglify && NODE_ENV=production postcss ./src/css/main.css -o ./static/css/main.css --verbose",
+    "watch": "NODE_ENV=development postcss ./src/css/main.css -o ./static/css/main.css -w --verbose"
   }
 }
