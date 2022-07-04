@@ -104,6 +104,19 @@ custom_items = [
 ]
 ```
 
+### Syntax highlighting
+In order to use highlught css themes it is reguired to add below config.
+Themes to choose: https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting
+```toml
+[markdown]
+# The theme to use for code highlighting.
+highlight_theme = "css"
+highlight_themes_css = [
+  { theme = "visual-studio-dark", filename = "syntax-dark.css" },
+  { theme = "cheerfully-light", filename = "syntax-light.css" },
+]
+```
+
 ## Contributing
 
 1. Fork the Project
@@ -118,8 +131,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-to-do
+@: wojciech@bitstudio.dev
+t: https://twitter.com/VV0JC13CH
 
-## Inspirations
+## Inspirations:
 
-to-do
+https://www.taniarascia.com
+https://github.com/timlrx/tailwind-nextjs-starter-blog
