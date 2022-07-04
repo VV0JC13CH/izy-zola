@@ -171,17 +171,14 @@ module.exports = {
           code: { color: theme('colors.primary.400') },
         },
         h1: {
-          fontWeight: '700',
           letterSpacing: theme('letterSpacing.tight'),
           color: theme('colors.neutral.100'),
         },
         h2: {
-          fontWeight: '700',
           letterSpacing: theme('letterSpacing.tight'),
           color: theme('colors.neutral.100'),
         },
         h3: {
-          fontWeight: '600',
           color: theme('colors.neutral.100'),
         },
         'h4,h5,h6': {
@@ -195,7 +192,6 @@ module.exports = {
         },
         hr: { borderColor: theme('colors.neutral.700') },
         'ol li:before': {
-          fontWeight: '600',
           color: theme('colors.neutral.400'),
         },
         'ul li:before': {
