@@ -4,7 +4,7 @@
 {% if page_is_project and not page.content %}{% set page_permalink = page.extra.repository | default(value=page.extra.homepage) %}{% else %}{% set page_permalink = page.permalink %}{% endif %}
 {#------------------------- project_vars -------------------#}
 {% set page_relative_path_array = page.relative_path | split(pat="/")  %}
-{% set feature_image_path = page_relative_path_array[0] ~ "/" ~ page.extra.feature_image  %}
+{% set feature_image_path = page.path ~ "/" ~ page.extra.feature_image  %}
 {% set feature_image = get_url(path=feature_image_path) | safe %}
 <div class="group w-full bg-light dark:bg-dark bg-opacity-50 dark:bg-opacity-50">
    <a class="c-card block bg-transparent rounded-lg overflow-hidden transform transition duration-500 group-hover:scale-105" href="{{ page_permalink }}">
