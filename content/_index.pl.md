@@ -1,6 +1,6 @@
 +++
-title = "Demo motywu Izy"
-description = "Demo motywu izy-zola dla generatora stron statycznych Zola"
+title = "Demo motywu"
+description = "Demo motywu Izy stworzonego na potrzeby dla Zola"
 date = 2021-11-12
 sort_by = "weight"
 transparent = true
