@@ -44,7 +44,7 @@
          </header>
          {% if page.extra.feature_image %}
          {% set page_relative_path_array = page.relative_path | split(pat="/")  %}
-         {% set feature_image_path = page.path ~ "/" ~ page.extra.feature_image  %}
+         {% set feature_image_path = page.path ~ page.extra.feature_image  %}
          {% set feature_image = get_url(path=feature_image_path) | safe %}
          <div class="relative flex flex-col items-center">
             <img alt="Cover image for {{ page.title }}" class="object-cover md:w-3/4 rounded-lg shadow-lg overflow-hidden my-4 mx-auto" src="{{ feature_image }}">
