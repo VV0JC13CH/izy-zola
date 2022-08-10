@@ -26,7 +26,7 @@
     "postcss-cli": "9.1.0",
     "tailwindcss": "3.1.6",
     "uglify-js": "3.16.2",
-    "@mdi/svg": "6.9.96"
+    "@mdi/svg": "7.0.96"
   },
   "scripts": {
     "uglify": "uglifyjs ./src/js/main.js --compress --mangle -o ./static/js/main.js && uglifyjs ./src/js/page.js --compress --mangle -o ./static/js/page.js && uglifyjs ./src/js/search.js --compress --mangle -o ./static/js/search.js && uglifyjs ./src/js/lang.js --compress --mangle -o ./static/js/lang.js && uglifyjs ./src/js/sidebar.js --compress --mangle -o ./static/js/sidebar.js",
