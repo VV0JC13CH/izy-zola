@@ -5,7 +5,6 @@ Live demo: https://izy-zola.netlify.app/
 ### Features
 
 Legend:
-- [ ] Analytics
 - [ ] Charts
 - [ ] Comments
 - [ ] Custom SVGs
@@ -15,6 +14,7 @@ Legend:
 - [ ] Sepia Mode
 - [x] Categories
 - [x] Dark Mode
+- [X] Google Analytics
 - [x] Multilingual
 - [x] Search
 - [x] Social Links

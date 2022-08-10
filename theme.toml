@@ -21,6 +21,9 @@ favicon = "/ico/favicon.ico"
 enable_search = true
 enable_multilingue = false
 
+[extra.ga]
+id = ""
+enabled = false
 
 # [extra.lang]
 # items = [
