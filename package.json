@@ -23,7 +23,7 @@
     "autoprefixer": "10.4.7",
     "cssnano": "5.1.12",
     "postcss": "8.4.16",
-    "postcss-cli": "9.1.0",
+    "postcss-cli": "10.0.0",
     "tailwindcss": "3.1.8",
     "uglify-js": "3.16.2",
     "@mdi/svg": "7.0.96"
