@@ -23,7 +23,7 @@ enable_multilingue = false
 
 [extra.ga]
 id = ""
-enable = false
+enabled = false
 
 # [extra.lang]
 # items = [
