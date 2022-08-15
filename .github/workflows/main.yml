@@ -3,10 +3,7 @@ on:
   repository_dispatch:
     types: [update-theme]
 jobs:
-  build:
-    runs-on: ubuntu-latest
   dispatch:
-          needs: build
           strategy:
             matrix:
               repo: ['VV0JC13CH/bitstudio.dev', 'VV0JC13CH/izy-zola-demo']
