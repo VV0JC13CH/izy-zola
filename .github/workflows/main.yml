@@ -2,6 +2,7 @@ name: Update theme
 on:
   repository_dispatch:
     types: [update-theme]
+    
 jobs:
   dispatch:
           strategy:
