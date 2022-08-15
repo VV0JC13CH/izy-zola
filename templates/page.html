@@ -51,8 +51,7 @@
          </div>
          {% endif %}
          <div class="flex flex-col">
-            {% if page.toc and page.extra.toc | default(value=page.toc) %}{% set _toc = true %}{% else %}{% set _toc = false %}{% endif %}   
-            <div class="xl:grid {% if _toc %} xl:grid-cols-4 {% else %} xl:grid-cols-3 {% endif %} xl:gap-x-6 bg-light border-1 border-day dark:border-night dark:bg-dark bg-opacity-50 dark:bg-opacity-75">
+            <div class="xl:grid {% if page.toc %}xl:grid-cols-4{% endif %} xl:gap-x-6 bg-light border-1 border-day dark:border-night dark:bg-dark bg-opacity-50 dark:bg-opacity-75" style="grid-template-rows: auto 1fr;">
                <div class="xl:col-span-3 xl:row-span-2 pt-10 pb-8 prose dark:prose-dark max-w-none">
                   {{ page.content | safe }}
                </div>
