@@ -51,11 +51,11 @@
          </div>
          {% endif %}
          <div class="flex flex-col">
-            <div class="xl:grid {% if page.toc %}xl:grid-cols-4{% endif %} xl:gap-x-6 bg-light border-1 border-day dark:border-night dark:bg-dark bg-opacity-50 dark:bg-opacity-75" style="grid-template-rows: auto 1fr;">
+            <div class="xl:grid {% if page.toc %} xl:grid-cols-4 {% else %} xl:grid-cols-3 {% endif %} xl:gap-x-6 bg-light border-1 border-day dark:border-night dark:bg-dark bg-opacity-50 dark:bg-opacity-75" style="grid-template-rows: auto 1fr;">
                <div class="xl:col-span-3 xl:row-span-2 pt-10 pb-8 prose dark:prose-dark max-w-none">
                   {{ page.content | safe }}
                </div>
-               {% if _toc %}   
+               {% if page.toc %}   
                {% block toc %}
                <div class="hidden xl:block sticky top-4 xl:top-8" id="toc">
                   <div class="px-2 pl-10 mb-4 text-sm tracking-tight text-neutral-500 dark:text-neutral-500">
