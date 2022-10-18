@@ -4,14 +4,9 @@ Live demo: https://izy-zola.netlify.app/
 
 ### Features
 
-Legend:
-- [ ] Charts
+Roadmap:
 - [ ] Comments
-- [ ] Custom SVGs
-- [ ] Diagrams
-- [ ] Gallery
 - [ ] Page 404
-- [ ] Sepia Mode
 - [x] Categories
 - [x] Dark Mode
 - [X] Google Analytics
