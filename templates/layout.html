@@ -2,7 +2,20 @@
 <!DOCTYPE html>
 <html class="dark" style="color-scheme: dark;" lang="{{lang}}">
    <head>
+      <link href="{{ get_url(path="/css/main.css") | safe }}" rel="stylesheet" type="text/css">
+      <link id="syntax_highlight" href="#" rel="stylesheet">
       {#------------------------- SCRIPTS/BEGIN -------------------------#}
+      {% if config.extra.ga.enabled %}
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.ga.id }}"></script>
+      <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{ config.extra.ga.id }}');
+      </script>
+      {% endif %}
       <script type="text/javascript" src="{{ get_url(path="js/main.js") | safe }}" defer></script>
       {% if config.build_search_index %}
       <script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") | safe }}" defer></script>
@@ -15,17 +28,6 @@
       {% if config.extra.enable_multilingue %}
       <script type="text/javascript" src="{{ get_url(path="js/lang.js") | safe }}" defer></script>
       {% endif %}
-      {% if config.extra.ga.enabled %}
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.ga.id }}"></script>
-      <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', '{{ config.extra.ga.id }}');
-      </script>
-      {% endif %}
       {% block extra_js %}
       {% endblock extra_js %}
       {#------------------------- SCRIPTS/END ---------------------------#}
@@ -35,8 +37,6 @@
       {% if config.extra.favicon %}
       <link href='{{ config.extra.favicon }}' rel="icon" />
       {% endif %}
-      <link href="{{ get_url(path="/css/main.css") | safe }}" rel="stylesheet" type="text/css">
-      <link id="syntax_highlight" href="#" rel="stylesheet">
       <title>
          {% block title %}
          {{ titles::default_title() }} :: {{ config.title }}
