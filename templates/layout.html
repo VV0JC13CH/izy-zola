@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html class="dark" style="color-scheme: dark;" lang="{{lang}}">
    <head>
+      <link href="{{ get_url(path="/css/main.css") | safe }}" rel="stylesheet" type="text/css">
+      <link id="syntax_highlight" href="#" rel="stylesheet">
       {#------------------------- SCRIPTS/BEGIN -------------------------#}
       {% if config.extra.ga.enabled %}
       <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -35,8 +37,6 @@
       {% if config.extra.favicon %}
       <link href='{{ config.extra.favicon }}' rel="icon" />
       {% endif %}
-      <link href="{{ get_url(path="/css/main.css") | safe }}" rel="stylesheet" type="text/css">
-      <link id="syntax_highlight" href="#" rel="stylesheet">
       <title>
          {% block title %}
          {{ titles::default_title() }} :: {{ config.title }}
