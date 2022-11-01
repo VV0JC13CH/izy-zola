@@ -13,7 +13,9 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', '{{ config.extra.ga.id }}', {cookie_flags: 'SameSite = None; Secure'});
+	  gtag('config', '{{ config.extra.ga.id }}',
+		  {cookie_domain: '{{ config.base_url | trim_start_matches(pat="http://") | trim_start_matches(pat="https://") | trim_end_matches(pat="/") }}',
+           cookie_flags: 'SameSite = None; Secure'});
       </script>
       {% endif %}
       <script type="text/javascript" src="{{ get_url(path="js/main.js") | safe }}" defer></script>
