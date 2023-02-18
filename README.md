@@ -161,19 +161,40 @@ highlight_themes_css = [
 ## Contributing
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create your Feature Branch (`git checkout -b feature`)
+3. Commit your Changes (`git commit -m 'Add some Feature'`)
+4. Push to the Branch (`git push origin feature`)
+5. Open a Pull Request to develop branch
+
+### Demo page of develop Branch
+Demo site always shows how current state of develop branch works: \
+https://izy-zola.netlify.app/
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE` for more information. 
+The goal of this project was to learn Tailwindcss, basics of JS and [Tera](https://tera.netlify.app/). 
+I'm very greatful to all the authors/owners of the MIT projects that I listed below and contributors of these projects. 
+Great work! You are very talented. In case below list is not complete, please create an Issue in this repository.
+
+### Licensed Features
+#### [blow by Thomas Chartron](https://github.com/tchartron/blow) (MIT)
+blow was used as a starting 'zola theme' template for this theme. 
+- deployment pipeline (package.json, postcss.config.js)
+- integration with tailwindcss (tailwind.config.js)
+- core animations (lang.js, search.js, page.js, main.js)
+#### [tailwind-nextjs-starter-blog by Timothy Lin](https://github.com/timlrx/tailwind-nextjs-starter-blog) (MIT)
+tailwind-nextjs-starter-blog was used as a starting 'tailwindcss' template for this theme.
+- origin of used tailwindcss classes and whole "look"
+- tags, categories view
+- navbar, footer
+#### [DeepThought by Ratan Kulshreshtha](https://github.com/RatanShreshtha/DeepThought) (MIT)
+- search animation and elasticlunr code in [search.js](https://github.com/VV0JC13CH/izy-zola/blob/develop/src/js/search.js)
 
 ## Contact
 
 - wojciech@bitstudio.dev
-- https://twitter.com/VV0JC13CH
+- https://mastodon.social/@wojciech
 
 ## Inspirations:
 
