@@ -98,4 +98,5 @@ instagram = {icon = "social_instagram.svg", lookup="instagram"}
 linkedin = {icon = "social_linkedin.svg", lookup="linkedin"}
 twitter = {icon = "social_twitter.svg", lookup="twitter"}
 youtube = {icon = "social_youtube.svg", lookup="youtube"}
+mastodon = {icon = "social_mastodon.svg", lookup="mastodon"}
 text = {icon = "text.svg", lookup="text"}
