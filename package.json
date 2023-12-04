@@ -18,20 +18,24 @@
     "tailwindcss"
   ],
   "devDependencies": {
-    "@tailwindcss/forms": "0.5.3",
-    "@tailwindcss/typography": "0.5.9",
-    "autoprefixer": "10.4.13",
-    "cssnano": "5.1.15",
-    "postcss": "8.4.21",
+    "@mdi/svg": "7.3.67",
+    "@tailwindcss/aspect-ratio": "0.4.2",
+    "@tailwindcss/forms": "0.5.7",
+    "@tailwindcss/typography": "0.5.10",
+    "autoprefixer": "10.4.16",
+    "cssnano": "6.0.1",
+    "postcss": "^8.4.32",
     "postcss-cli": "10.1.0",
-    "tailwindcss": "3.2.7",
-    "uglify-js": "3.17.4",
-    "@mdi/svg": "7.1.96"
+    "tailwindcss": "3.3.6",
+    "uglify-js": "3.17.4"
   },
   "scripts": {
     "uglify": "uglifyjs ./src/js/main.js --compress --mangle -o ./static/js/main.js && uglifyjs ./src/js/page.js --compress --mangle -o ./static/js/page.js && uglifyjs ./src/js/search.js --compress --mangle -o ./static/js/search.js && uglifyjs ./src/js/lang.js --compress --mangle -o ./static/js/lang.js && uglifyjs ./src/js/sidebar.js --compress --mangle -o ./static/js/sidebar.js",
     "dev": "npm run uglify && NODE_ENV=development postcss ./src/css/main.css -o ./static/css/main.css --verbose",
     "prod": "npm run uglify && NODE_ENV=production postcss ./src/css/main.css -o ./static/css/main.css --verbose",
     "watch": "NODE_ENV=development postcss ./src/css/main.css -o ./static/css/main.css -w --verbose"
+  },
+  "dependencies": {
+    "package.json": "^2.0.0"
   }
 }
