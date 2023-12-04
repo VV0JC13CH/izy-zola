@@ -36,6 +36,6 @@
     "watch": "NODE_ENV=development postcss ./src/css/main.css -o ./static/css/main.css -w --verbose"
   },
   "dependencies": {
-    "package.json": "^0.0.0"
+    "package.json": "^2.0.0"
   }
 }
