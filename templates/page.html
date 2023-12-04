@@ -42,12 +42,17 @@
                </dl>
             </div>
          </header>
-         {% if page.extra.feature_image %}
+         {% if page.extra.show_feature_image %}
          {% set page_relative_path_array = page.relative_path | split(pat="/")  %}
          {% set feature_image_path = page.path ~ page.extra.feature_image  %}
          {% set feature_image = get_url(path=feature_image_path) | safe %}
          <div class="relative flex flex-col items-center">
             <img alt="Cover image for {{ page.title }}" class="object-cover md:w-3/4 rounded-lg shadow-lg overflow-hidden my-4 mx-auto" src="{{ feature_image }}">
+         </div>
+         {% endif %}
+         {% if page.extra.youtube %}
+         <div class="relative flex flex-col items-center aspect-w-16 aspect-h-9">
+         <iframe width="1920" height="1080" src="{{ page.extra.youtube }}{% if page.extra.youtube is containing("?") %}&{% else %}?{% endif %}autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
          </div>
          {% endif %}
          <div class="flex flex-col">
